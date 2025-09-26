@@ -15,13 +15,13 @@ def import_csv_to_sqlite():
     df_metrics = pd.read_csv(metrics_path)
     df_metrics["date"] = pd.to_datetime(df_metrics["date"]).dt.date
 
-    df_metrics.to_sql("metrics", conn, if_exists="replace", index=False)
+    df_metrics.to_sql("metrics", conn, if_exists="replace", index=True, index_label="id")
     print(f"Importado metrics.csv → tabela metrics ({len(df_metrics)} linhas)")
 
     users_path = DATA_DIR / "users.csv"
     df_users = pd.read_csv(users_path)
 
-    df_users.to_sql("users", conn, if_exists="replace", index=False)
+    df_users.to_sql("users", conn, if_exists="replace", index=True, index_label="id")
     print(f"Importado users.csv → tabela users ({len(df_users)} linhas)")
 
     conn.close()
