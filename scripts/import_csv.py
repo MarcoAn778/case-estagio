@@ -17,17 +17,17 @@ def import_csv_to_sqlite():
     metrics_path = DATA_DIR / "metrics.csv"
     df_metrics = pd.read_csv(metrics_path)
     df_metrics["date"] = pd.to_datetime(df_metrics["date"]).dt.date
-
     df_metrics.to_sql("metrics", conn, if_exists="replace", index=True, index_label="id")
-    print(f"Importado metrics.csv → tabela metrics ({len(df_metrics)} linhas)")
+    print(f"Metrics.csv importado → tabela metrics ({len(df_metrics)} linhas)")
 
     users_path = DATA_DIR / "users.csv"
     df_users = pd.read_csv(users_path)
 
     df_users["password"] = df_users["password"].apply(lambda p: pwd_context.hash(str(p)))
+    df_users["email"] = df_users["username"].apply(lambda u: f"{u}@gmail.com")
 
     df_users.to_sql("users", conn, if_exists="replace", index=True, index_label="id")
-    print(f"Importado users.csv → tabela users ({len(df_users)} linhas)")
+    print(f"Users.csv importado → tabela users ({len(df_users)} linhas)")
 
     conn.close()
     print(f"Banco criado/atualizado em: {DB_PATH}")

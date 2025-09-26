@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, BigInteger, Float, Date, String
-from .db import Base
+from .database import Base
 
 class Metric(Base):
     __tablename__ = "metrics"
@@ -17,5 +17,6 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, nullable=False, index=True)
-    password = Column(String, nullable=False)  # já hasheada no import
+    email = Column(String, unique=True, nullable=False, index=True)
+    password = Column(String, nullable=False) 
     role = Column(String, nullable=False)

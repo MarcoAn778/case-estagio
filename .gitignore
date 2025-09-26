@@ -9,7 +9,7 @@ __pycache__/
 .venv/
 env/
 venv/
-
+/data
 
 .ipynb_checkpoints/
 
