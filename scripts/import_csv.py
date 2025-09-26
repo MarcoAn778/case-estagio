@@ -13,7 +13,7 @@ def import_csv_to_sqlite():
 
     metrics_path = DATA_DIR / "metrics.csv"
     df_metrics = pd.read_csv(metrics_path)
-    df_metrics["date"] = pd.to_datetime(df_metrics["date"])
+    df_metrics["date"] = pd.to_datetime(df_metrics["date"]).dt.date
 
     df_metrics.to_sql("metrics", conn, if_exists="replace", index=False)
     print(f"Importado metrics.csv → tabela metrics ({len(df_metrics)} linhas)")
