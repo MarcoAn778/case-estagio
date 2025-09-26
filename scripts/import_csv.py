@@ -1,6 +1,9 @@
 import pandas as pd
 import sqlite3
 from pathlib import Path
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -20,6 +23,8 @@ def import_csv_to_sqlite():
 
     users_path = DATA_DIR / "users.csv"
     df_users = pd.read_csv(users_path)
+
+    df_users["password"] = df_users["password"].apply(lambda p: pwd_context.hash(str(p)))
 
     df_users.to_sql("users", conn, if_exists="replace", index=True, index_label="id")
     print(f"Importado users.csv → tabela users ({len(df_users)} linhas)")
