@@ -2,8 +2,9 @@ from fastapi import FastAPI, Depends, HTTPException, Query, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from contextlib import asynccontextmanager
-from datetime import date, timedelta
-from typing import List, Optional
+from datetime import timedelta
+from typing import List
+from .schemas import MetricsFilter
 import logging
 
 from . import crud_operations, database, dependencies, schemas, models, auth, config
@@ -51,29 +52,27 @@ def login(
 
 @app.get("/metrics", tags=["Metrics"])
 def read_metrics(
-    skip: int = 0,
-    limit: int = 100,
-    start_date: Optional[date] = Query(None, description="Data inicial"),
-    end_date: Optional[date] = Query(None, description="Data final"),
-    order_by: str = Query("date", description="Coluna para ordenar"),
-    desc: bool = Query(True, description="Ordenar de forma decrescente?"),
+    filters: MetricsFilter = Depends(),
     db: Session = Depends(database.get_db),
     current_user: models.User = Depends(dependencies.get_current_user)
 ):
+    if not hasattr(models.Metric, filters.order_by):
+        raise HTTPException(
+            status_code=422,
+            detail=f"Coluna inválida para ordenação: {filters.order_by}"
+        )
+
     query = db.query(models.Metric)
 
-    if start_date:
-        query = query.filter(models.Metric.date >= start_date)
-    if end_date:
-        query = query.filter(models.Metric.date <= end_date)
+    if filters.start_date:
+        query = query.filter(models.Metric.date >= filters.start_date)
+    if filters.end_date:
+        query = query.filter(models.Metric.date <= filters.end_date)
 
-    if hasattr(models.Metric, order_by):
-        column = getattr(models.Metric, order_by)
-        query = query.order_by(column.desc() if desc else column.asc())
-    else:
-        raise HTTPException(status_code=400, detail=f"Coluna inválida para ordenação: {order_by}")
+    column = getattr(models.Metric, filters.order_by)
+    query = query.order_by(column.desc() if filters.desc else column.asc())
 
-    items = query.offset(skip).limit(limit).all()
+    items = query.offset(filters.skip).limit(filters.limit).all()
 
     result: List[dict] = []
     for item in items:
