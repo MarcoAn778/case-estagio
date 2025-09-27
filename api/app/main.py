@@ -6,7 +6,7 @@ from datetime import timedelta
 from typing import List
 from .schemas import MetricsFilter
 import logging
-
+from .config.cors import setup_cors
 from . import crud_operations, database, dependencies, schemas, models, auth, config
 
 logger = logging.getLogger("uvicorn")
@@ -20,7 +20,9 @@ async def lifespan(app: FastAPI):
     database.engine.dispose()
 
 
-app = FastAPI(title="Case - API (Dia 3)", lifespan=lifespan)
+app = FastAPI(title="Case api", lifespan=lifespan)
+
+setup_cors(app)
 
 
 @app.get("/health", tags=["Health"])
