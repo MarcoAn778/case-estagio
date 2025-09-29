@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from . import models, auth
+from . import models, security
 import logging
 from typing import Optional
 
@@ -15,7 +15,6 @@ def get_metrics(db: Session, skip: int = 0, limit: int = 100):
         .all()
     )
 
-
 def count_metrics(db: Session) -> int:
     return db.query(models.Metric).count()
 
@@ -29,7 +28,7 @@ def authenticate_user(db: Session, email: str, password: str) -> Optional[models
     if not user:
         logger.warning(f"Tentativa de login falhou: email={email} (não encontrado)")
         return None
-    if not auth.verify_password(password, user.password):
+    if not security.verify_password(password, user.password):
         logger.warning(f"Tentativa de login falhou: email={email} (senha incorreta)")
         return None
     logger.info(f"Login bem-sucedido para email={email}")
