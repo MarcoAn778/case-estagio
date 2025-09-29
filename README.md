@@ -21,6 +21,7 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 ### Crie um ambiente virtual e ative-o:
 
   python -m venv .venv
+  
   .venv\Scripts\activate
 
 ### Atualize o pip:
