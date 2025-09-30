@@ -16,7 +16,7 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
   git clone https://github.com/MarcoAn778/case-estagio.git
 
-### Crie a pasta data na raiz do projeto e adicione os arquivos CSV necessários (metrics.csv, users.csv e case.db):
+### Crie a pasta data na raiz do projeto e adicione os arquivos CSV necessários (metrics.csv, users.csv):
 
 ### Crie um ambiente virtual e ative-o:
 
@@ -30,11 +30,7 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
 ### Instale as dependências:
 
-  pip install pandas fastapi uvicorn[standard] sqlalchemy pydantic python-dotenv
-
--Se você for usar formulários com FastAPI, instale também o python-multipart:
-
-  pip install python-multipart
+  pip install pandas fastapi uvicorn[standard] sqlalchemy pydantic python-dotenv python-multipart
 
 ## Rodando a aplicação
 
@@ -63,7 +59,50 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
   python -m pytest api/tests -v
 
-
   -v ativa o modo verbose para mostrar detalhes dos testes.
 
 Certifique-se de estar com o virtualenv ativo.
+
+# Guia para o Front end
+
+O frontend foi desenvolvido em React + Vite e está localizado dentro da pasta frontend/.
+
+## Pré-requisitos
+
+  Node.js 20 ou superior
+
+  npm (instalado junto com o Node)
+
+## Instalação
+
+### Entre na pasta do frontend:
+
+ cd frontend
+
+
+### Instale as dependências:
+
+ npm install
+
+## Rodando a aplicação
+
+### Dentro da pasta frontend, rode:
+
+ npm run dev
+
+
+### O servidor de desenvolvimento será iniciado em:
+
+ http://localhost:5173
+
+# Como rodar o projeto completo
+
+## Inicie o backend:
+
+  uvicorn api.main:app --reload
+
+
+## Em outro terminal(cmd), inicie o frontend:
+
+  cd frontend
+  npm run dev
