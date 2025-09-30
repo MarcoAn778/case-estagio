@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+pydantic-settings
+passlib[argon2]
+python-jose
+python-dotenv
+python-multipart
+pandas
+pytest
+httpx
