@@ -16,8 +16,13 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
   git clone https://github.com/MarcoAn778/case-estagio.git
 
-### Crie a pasta data na raiz do projeto e adicione os arquivos CSV necessários (metrics.csv, users.csv):
-
+### Importação do banco:
+  Crie a pasta 'data' na raiz do projeto e adicione os arquivos CSV necessários (metrics.csv, users.csv)
+  
+  Importa os dados dos arquivos csv no banco:
+  
+  python scripts/import_csv.py
+  
 ### Crie um ambiente virtual e ative-o:
 
   python -m venv .venv
@@ -48,7 +53,19 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
    http://localhost:8000
 
-
+### Usuários:
+#### User1:
+  Username: user1@gmail.com 
+  
+  Senha: oeiruhn56146 
+  
+  Role: admin 
+#### User2: 
+  Username: user2@gmail.com 
+  
+  Senha: 908ijofff
+  
+  Role: user 
 ### Para documentação interativa das rotas (Swagger UI):
 
   /docs
