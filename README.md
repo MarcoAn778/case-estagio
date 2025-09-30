@@ -30,7 +30,7 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
 ### Instale as dependências:
 
-  pip install pandas fastapi uvicorn[standard] sqlalchemy pydantic python-dotenv python-multipart
+  pip install -r requirements.txt
 
 ## Rodando a aplicação
 
@@ -61,8 +61,6 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
   -v ativa o modo verbose para mostrar detalhes dos testes.
 
-Certifique-se de estar com o virtualenv ativo.
-
 # Guia para o Front end
 
 O frontend foi desenvolvido em React + Vite e está localizado dentro da pasta frontend/.
@@ -79,7 +77,6 @@ O frontend foi desenvolvido em React + Vite e está localizado dentro da pasta f
 
  cd frontend
 
-
 ### Instale as dependências:
 
  npm install
@@ -94,15 +91,3 @@ O frontend foi desenvolvido em React + Vite e está localizado dentro da pasta f
 ### O servidor de desenvolvimento será iniciado em:
 
  http://localhost:5173
-
-# Como rodar o projeto completo
-
-## Inicie o backend:
-
-  uvicorn api.main:app --reload
-
-
-## Em outro terminal(cmd), inicie o frontend:
-
-  cd frontend
-  npm run dev
