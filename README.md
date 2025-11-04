@@ -16,6 +16,12 @@ Este projeto é um **case de estágio da .monks** que utiliza Python, FastAPI e 
 
   git clone https://github.com/MarcoAn778/case-estagio.git
 
+### Crie um ambiente virtual e ative-o:
+
+  python -m venv .venv  (ou py)
+  
+  .venv\Scripts\activate
+
 ### Atualize o pip:
 
   pip install --upgrade pip
