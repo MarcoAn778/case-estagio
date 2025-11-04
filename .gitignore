@@ -10,8 +10,8 @@ __pycache__/
 env/
 venv/
 /data
-
 .ipynb_checkpoints/
+
 
 
 node_modules/
@@ -23,5 +23,5 @@ build/
 
 .DS_Store
 Thumbs.db
-
+.env
 
